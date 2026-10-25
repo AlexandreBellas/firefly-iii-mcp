@@ -1,11 +1,12 @@
 import fs from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import SwaggerParser from '@apidevtools/swagger-parser';
 import { OpenAPIV3 } from 'openapi-types';
 import { McpToolDefinition } from '../src/types';
 import { getToolsFromOpenApiDocument } from './generator/api';
 
-/** Api Document URL */
-const API_DOCUMENT_URL = 'https://api-docs.firefly-iii.org/firefly-iii-6.2.13-v1.yaml';
+/** Vendored OpenAPI document, resolved next to this script so builds do not download it. */
+const API_DOCUMENT_URL = fileURLToPath(new URL('./firefly-iii-6.2.13-v1.yaml', import.meta.url));
 const OUTPUT_FILE = './src/tools.ts';
 
 /** Enabled actions to generate tools for */
